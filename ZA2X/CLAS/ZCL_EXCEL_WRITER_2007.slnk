@@ -2732,7 +2732,7 @@ ENDMETHOD.</source>
 
   SHIFT lv_uniquecount_str RIGHT DELETING TRAILING space.
   SHIFT lv_uniquecount_str LEFT DELETING LEADING space.
-
+  REFRESH shared_strings.
   clear lv_count.
   LOOP AT lt_cell_data ASSIGNING &lt;fs_sheet_content&gt; where data_type = &apos;s&apos;.
 *    lv_sytabix = sy-tabix - 1.
@@ -2740,7 +2740,7 @@ ENDMETHOD.</source>
     MOVE lv_sytabix                    TO ls_shared_string-string_no.
     MOVE &lt;fs_sheet_content&gt;-cell_value TO ls_shared_string-string_value.
     MOVE &lt;fs_sheet_content&gt;-data_type TO ls_shared_string-string_type.
-    APPEND ls_shared_string TO shared_strings.
+    INSERT ls_shared_string INTO TABLE shared_strings.
     add 1 to lv_count.
   ENDLOOP.
 
